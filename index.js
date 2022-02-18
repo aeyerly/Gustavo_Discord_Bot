@@ -142,18 +142,7 @@ Reflect.defineProperty(currency, 'getBalance', {
 });
 
 client.on('message', message => {
-    //Word corrections
-    const correctionList = ['egg', 'Egg', 'eGg', 'egG', 'EGg', 'eGG', 'EgG', 'EGG', 'e g g', 'E g g', 'E G G'];
-
-    if (!message.content.startsWith(prefix) && !message.author.bot) {
-        correctionList.forEach(correction => {
-            if(message.content.includes(correction)) {
-                message.reply('Eww. Eegs only please.');
-            }
-
-        })
-    }
-
+   
     if (message.content.startsWith(prefix)) {
         //Formatting command
         const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -162,12 +151,6 @@ client.on('message', message => {
         if (!client.commands.has(commandName)) return;
 
         const command = client.commands.get(commandName);
-
-        if ((message.author.tag === 'wickeditch#6576' || message.author.tag === 'MrSethreekun#7408') && commandName != 'anon') {
-            if (message.channel.type === 'dm') {
-                return message.channel.send('Stop using the bot in dms you nerd!');
-            }
-        }
         
         //User did not provide arguments when command requires arguments
         if (command.args && !args.length) {
